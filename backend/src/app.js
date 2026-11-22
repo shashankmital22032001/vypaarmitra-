@@ -19,7 +19,7 @@ const CLIENT_ROUTES = new Set(['/', '/privacy-policy', '/terms']);
 export function createApp() {
   const app = express();
 
-  // Behind one proxy (Render, Railway, Nginx) so req.ip and rate limits use the real client IP.
+  // Behind one proxy (Nginx) so req.ip and rate limits use the real client IP.
   app.set('trust proxy', 1);
   app.disable('x-powered-by');
 

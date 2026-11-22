@@ -128,11 +128,3 @@ export function CloseIcon({ size = 20, ...props }) {
     </svg>
   );
 }
-
-export function DoubleTick({ size = 16, ...props }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" {...props}>
-      <path d="m2 13 4 4 8-9m-2 9 1 0 8-9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}

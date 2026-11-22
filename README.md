@@ -29,15 +29,34 @@ npm run build          # builds frontend/dist
 NODE_ENV=production npm start   # Express serves the API and the built site on one port
 ```
 
-Set `NODE_ENV=production` and `CORS_ORIGINS=https://vypaarmitra.com` in the host's environment.
+### Hosting: Hostinger VPS (Ubuntu 24.04)
 
-### Deploy on Render
+Nginx (HTTPS, Let's Encrypt) → Node app on port 5000, kept running by PM2. Files in `deploy/`:
 
-`render.yaml` defines one web service (Starter plan) that builds the frontend and runs the API.
-Render → New → Blueprint → select the GitHub repo, then paste the secret values from `backend/.env`
-and `frontend/.env` when asked. Add `vypaarmitra.com` under Settings → Custom Domains and create the
-DNS records Render shows at GoDaddy (keep the MX/TXT email records untouched).
-In MongoDB Atlas → Network Access, allow `0.0.0.0/0` (Render has no fixed outbound IP).
+| File | Purpose |
+| --- | --- |
+| `setup.sh` | One-time server setup: packages, Node, PM2, firewall, clone, build, Nginx, HTTPS |
+| `update.sh` | Pull from GitHub, rebuild, restart with no downtime |
+| `ecosystem.config.cjs` | PM2 settings (production env, port, allowed origins) |
+| `nginx.conf` | Reverse proxy; www → non-www; no buffering for the chatbot stream |
+
+**First setup** (from the project folder on your PC, replace `IP` with the VPS IP):
+
+```
+scp deploy/setup.sh root@IP:/root/setup.sh
+scp backend/.env root@IP:/root/backend.env
+scp frontend/.env root@IP:/root/frontend.env
+ssh root@IP "bash setup.sh"
+```
+
+1. The first run prints a key: add it on GitHub → repo → Settings → Deploy keys (read-only), then run `ssh root@IP "bash setup.sh"` again.
+2. MongoDB Atlas → Network Access: add the VPS IP.
+3. GoDaddy DNS: `A` record `@` → VPS IP, `CNAME` `www` → `vypaarmitra.com`. Keep the MX/TXT email records.
+4. After DNS updates, run `setup.sh` once more to turn on HTTPS.
+
+**Deploy changes:** push to GitHub, then `ssh root@IP "sudo -u vypaar -H bash -lc 'bash ~/app/deploy/update.sh'"`.
+
+**Logs / status:** `ssh root@IP "sudo -u vypaar -H pm2 logs vypaarmitra --lines 50"` (or `pm2 status`).
 
 ## API
 
@@ -48,6 +67,7 @@ In MongoDB Atlas → Network Access, allow `0.0.0.0/0` (Render has no fixed outb
 | GET    | `/api/leads`          | `x-api-key` | List leads (`?page=&limit=&status=`)               |
 | POST   | `/api/events`         | none        | `audit_cta_click` tracking (package + section)     |
 | GET    | `/api/events/summary` | `x-api-key` | Click counts by package and section                |
+| POST   | `/api/chat`           | none        | "Mitra" chatbot (streams text; AI if `ANTHROPIC_API_KEY` set) |
 
 Example: `curl -H "x-api-key: <ADMIN_API_KEY>" http://localhost:5000/api/leads`
 
@@ -78,5 +98,4 @@ frontend/src
 - Fill in the WhatsApp number and the Atlas connection string.
 - Have the Privacy Policy and Terms drafts reviewed.
 - Connect GA4 and Search Console; submit `https://vypaarmitra.com/sitemap.xml`.
-- Set up the www → non-www and HTTP → HTTPS redirects at your host or DNS.
 - Test every WhatsApp button on a phone.

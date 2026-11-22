@@ -1,6 +1,5 @@
 // Package values match the analytics spec in the website brief.
-// 'complete' is the retired Package 3, kept so older leads/events stay valid.
-export const PACKAGES = Object.freeze(['general', 'marketplace', 'website', 'complete', 'growth', 'founding']);
+export const PACKAGES = Object.freeze(['general', 'marketplace', 'website', 'growth', 'founding']);
 
 export const SECTIONS = Object.freeze([
   'header',
@@ -10,7 +9,6 @@ export const SECTIONS = Object.freeze([
   'problem',
   'packages',
   'how-it-works',
-  'weekly-report',
   'what-you-get',
   'chatbot',
   'why-us',
