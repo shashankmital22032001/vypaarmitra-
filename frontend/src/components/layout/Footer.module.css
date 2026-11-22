@@ -1,0 +1,66 @@
+.footer {
+  background: var(--navy-dark);
+  color: var(--white-80);
+  padding-top: var(--section-pad);
+  font-size: var(--fs-small);
+}
+
+.grid {
+  display: grid;
+  gap: 40px;
+}
+
+.brand {
+  max-width: 360px;
+}
+
+/* .brand prefix beats the global .label colour (gold on navy per the brief). */
+.brand .tagline {
+  display: block;
+  margin-top: 20px;
+  color: var(--gold);
+}
+
+.description {
+  margin-top: 12px;
+}
+
+.heading {
+  font-size: var(--fs-label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.list {
+  display: grid;
+  gap: 2px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--white-80);
+  transition: color 0.2s ease;
+}
+
+a.link:hover {
+  color: var(--gold);
+}
+
+.bottom {
+  margin-top: 48px;
+  padding-block: 24px;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+  color: var(--white-60);
+  font-size: var(--fs-label);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 2fr 1fr 1.2fr;
+  }
+}

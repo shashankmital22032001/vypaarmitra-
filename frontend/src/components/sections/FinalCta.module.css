@@ -1,0 +1,51 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: var(--section-pad);
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* Soft light/shade so the flat gold has depth */
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(600px 300px at 10% 0%, rgb(255 255 255 / 0.25), transparent 70%),
+    radial-gradient(500px 300px at 100% 100%, rgb(217 138 11 / 0.45), transparent 70%);
+}
+
+.grid {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+
+.paragraph {
+  margin-top: 16px;
+  max-width: 560px;
+  font-weight: 500;
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.small {
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+}

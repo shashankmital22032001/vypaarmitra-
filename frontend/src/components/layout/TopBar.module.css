@@ -1,0 +1,10 @@
+.bar {
+  background: var(--navy-dark);
+  color: var(--gold);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-align: center;
+  padding-block: 9px;
+}

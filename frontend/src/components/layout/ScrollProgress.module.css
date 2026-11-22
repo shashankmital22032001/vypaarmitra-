@@ -1,0 +1,13 @@
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold), #ffc861);
+  box-shadow: 0 0 10px rgb(245 166 35 / 0.6);
+  transform-origin: left;
+  transform: scaleX(var(--progress, 0));
+}

@@ -1,0 +1,30 @@
+{
+  "name": "vypaarmitra-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VypaarMitra API: audit leads and CTA click tracking",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22.9"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=.env src/server.js",
+    "start": "node --env-file-if-exists=.env src/server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.12.0",
+    "compression": "^1.8.2",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.5",
+    "helmet": "^8.3.0",
+    "mongoose": "^9.12.3",
+    "morgan": "^1.12.1",
+    "nodemailer": "^10.6.1",
+    "zod": "^4.6.7"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

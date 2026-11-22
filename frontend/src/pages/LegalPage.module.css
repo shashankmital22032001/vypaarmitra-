@@ -1,0 +1,52 @@
+.hero {
+  padding-block: 64px 48px;
+  background: var(--navy);
+}
+
+.title {
+  margin-top: 8px;
+  color: var(--white);
+}
+
+.updated {
+  margin-top: 12px;
+  color: var(--white-60);
+  font-size: var(--fs-small);
+}
+
+.body {
+  max-width: calc(800px + var(--gutter) * 2);
+  padding-block: 48px var(--section-pad);
+}
+
+.body h2 {
+  margin-top: 40px;
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+}
+
+.body p + p,
+.body ul + p {
+  margin-top: 12px;
+}
+
+.body ul {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding-left: 22px;
+  list-style: disc;
+}
+
+.body li::marker {
+  color: var(--gold-deep);
+}
+
+.body a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}

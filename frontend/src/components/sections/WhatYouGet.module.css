@@ -1,0 +1,183 @@
+.head {
+  max-width: 760px;
+}
+
+.grid {
+  display: grid;
+  gap: 40px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+/* ----- Timeline: a gold line draws down, then each milestone pops in ----- */
+.timeline {
+  --marker: 32px;
+  position: relative;
+  display: grid;
+  gap: 16px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--marker) / 2 - 1px);
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: linear-gradient(var(--gold), rgb(245 166 35 / 0.25));
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.4s var(--ease-out) 0.1s;
+}
+
+.timeline:global(.is-visible)::before {
+  transform: none;
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--marker) 1fr;
+  gap: 16px;
+  align-items: start;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition:
+    opacity 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out);
+  transition-delay: calc(0.2s + var(--i) * 0.18s);
+}
+
+.timeline:global(.is-visible) .item {
+  opacity: 1;
+  transform: none;
+}
+
+.marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--marker);
+  height: var(--marker);
+  margin-top: 18px;
+  border-radius: 50%;
+  background: var(--navy);
+  box-shadow: 0 0 0 5px var(--cream);
+}
+
+.body {
+  padding: 18px 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--navy-10);
+  background: var(--white);
+  transition:
+    transform 0.35s var(--ease-out),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.item:hover .body {
+  transform: translateX(6px);
+  border-color: rgb(245 166 35 / 0.6);
+  box-shadow: var(--shadow);
+}
+
+.when {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: rgb(245 166 35 / 0.16);
+  color: var(--gold-deep);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 8px 0 4px;
+  font-size: 1.25rem;
+}
+
+.body p:last-child {
+  font-size: var(--fs-small);
+}
+
+/* ----- Founding client offer ----- */
+.offer {
+  position: relative;
+  overflow: hidden;
+  padding: 32px 28px;
+  border-radius: var(--radius-lg);
+  background: var(--navy);
+  color: var(--white-80);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Slow gold sheen across the card */
+.offer::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(from 0deg, transparent 0 70%, rgb(245 166 35 / 0.35) 80%, transparent 90%);
+  animation: sheen 6s linear infinite;
+  pointer-events: none;
+}
+
+.offer::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: calc(var(--radius-lg) - 2px);
+  background: var(--navy);
+  pointer-events: none;
+}
+
+.offer > * {
+  position: relative;
+  z-index: 1;
+}
+
+.offerLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold);
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.offerText {
+  margin: 16px 0 28px;
+}
+
+@keyframes sheen {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 56px;
+  }
+
+  .offerWrap {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    opacity: 1;
+    transform: none;
+  }
+
+  .timeline::before {
+    transform: none;
+  }
+}

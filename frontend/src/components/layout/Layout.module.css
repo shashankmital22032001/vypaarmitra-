@@ -1,0 +1,25 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  /* Elements sliding in from the side must never cause sideways scroll.
+     clip (not hidden) keeps the sticky header working. */
+  overflow-x: clip;
+  /* Room for the fixed mobile WhatsApp bar so it never covers the footer. */
+  padding-bottom: calc(var(--mobile-bar-h) + env(safe-area-inset-bottom));
+}
+
+.main {
+  flex: 1;
+  outline: none;
+}
+
+.fallback {
+  min-height: 60vh;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    padding-bottom: 0;
+  }
+}

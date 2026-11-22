@@ -1,0 +1,50 @@
+/* Design tokens: colours sampled from the VypaarMitra logo. */
+:root {
+  --navy: #0f2a43;
+  --navy-dark: #0a1e31;
+  --navy-soft: #16385a;
+  --gold: #f5a623;
+  --gold-deep: #d98a0b;
+  --cream: #fbf7ef;
+  --cream-deep: #f3ecdd;
+  --white: #ffffff;
+  --slate: #5a6472;
+  --white-80: rgb(255 255 255 / 0.8);
+  --white-60: rgb(255 255 255 / 0.6);
+  --navy-10: rgb(15 42 67 / 0.1);
+  --navy-15: rgb(15 42 67 / 0.15);
+
+  --radius-lg: 24px;
+  --radius-md: 12px;
+  --radius-pill: 9999px;
+  --shadow: 0 8px 30px rgb(15 42 67 / 0.08);
+  --shadow-lift: 0 18px 44px rgb(15 42 67 / 0.14);
+
+  --font-heading: 'Space Grotesk', 'Noto Sans Devanagari', 'Noto Sans Gurmukhi', system-ui, sans-serif;
+  --font-body: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Gurmukhi', system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
+
+  /* Type scale: mobile → desktop (brief: H1 36→56, H2 28→40, H3 24, body 16→18) */
+  --fs-h1: clamp(2.25rem, 1.6rem + 2.9vw, 3.5rem);
+  --fs-h2: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --fs-h3: 1.5rem;
+  --fs-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --fs-small: 0.9375rem;
+  --fs-label: 0.8125rem;
+
+  --container: 1200px;
+  --gutter: 16px;
+  --section-pad: 56px;
+  --header-h: 68px;
+  --mobile-bar-h: 76px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+    --section-pad: 96px;
+    --header-h: 76px;
+  }
+}

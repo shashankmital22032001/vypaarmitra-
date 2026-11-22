@@ -1,0 +1,82 @@
+.fab {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .fab {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    box-shadow:
+      0 0 0 3px var(--gold),
+      0 12px 28px rgb(15 42 67 / 0.3);
+    animation: popIn 0.5s var(--ease-out) 1.2s both;
+    transition: transform 0.25s var(--ease-out);
+  }
+
+  /* Soft gold pulse ring */
+  .fab::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    animation: pulse 2.6s ease-out 2s infinite;
+  }
+
+  .fab:hover {
+    transform: scale(1.06);
+  }
+
+  .tip {
+    position: absolute;
+    right: calc(100% + 14px);
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateX(8px);
+    pointer-events: none;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s var(--ease-out);
+  }
+
+  .fab:hover .tip,
+  .fab:focus-visible .tip {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  80%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}

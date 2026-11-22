@@ -1,0 +1,223 @@
+.title {
+  max-width: 720px;
+}
+
+/* ----- Mobile: vertical timeline ----- */
+.steps {
+  --circle: 56px;
+  --gap: 40px;
+
+  display: grid;
+  gap: var(--gap);
+  margin-top: 48px;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--circle) 1fr;
+  gap: 20px;
+  align-items: start;
+  /* Steps stretch to equal height; keep extra space below, not between rows. */
+  align-content: start;
+}
+
+.circle {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--circle);
+  height: var(--circle);
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.5rem;
+  box-shadow:
+    0 0 0 6px rgb(245 166 35 / 0.15),
+    0 10px 24px rgb(0 0 0 / 0.25);
+}
+
+/* Thin gold line from this circle to the next, with a gold V at the joint */
+.connector {
+  position: absolute;
+  left: calc(var(--circle) / 2 - 1px);
+  top: calc(var(--circle) + 8px);
+  bottom: calc(8px - var(--gap));
+  width: 2px;
+  background: linear-gradient(var(--gold), rgb(245 166 35 / 0.35));
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 0.9s var(--ease-out) 0.3s;
+}
+
+:global(.is-visible) > .connector {
+  transform: none;
+}
+
+/* A bright pulse of light that keeps flowing along the line toward the next step */
+.connector::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(transparent 0%, #ffe2a8 45%, #fff 50%, #ffe2a8 55%, transparent 100%) no-repeat;
+  background-size: 100% 40%;
+  filter: drop-shadow(0 0 4px rgb(245 166 35 / 0.9));
+}
+
+:global(.is-visible) > .connector::after {
+  opacity: 1;
+  animation: flowY 2.2s linear 1.2s infinite;
+}
+
+/* The gold V arrow travels along the line, pointing at the next step. */
+.joint {
+  --rotate: 0deg;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 3px;
+  box-sizing: content-box;
+  background: var(--navy);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(var(--rotate));
+}
+
+:global(.is-visible) > .connector .joint {
+  animation: travelY 2.2s var(--ease-out) 1.2s infinite;
+}
+
+@keyframes flowY {
+  from {
+    background-position: 0 -150%;
+  }
+  to {
+    background-position: 0 250%;
+  }
+}
+
+@keyframes flowX {
+  from {
+    background-position: -150% 0;
+  }
+  to {
+    background-position: 250% 0;
+  }
+}
+
+@keyframes travelY {
+  0% {
+    top: 8%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 92%;
+    opacity: 0;
+  }
+}
+
+@keyframes travelX {
+  0% {
+    left: 8%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: 92%;
+    opacity: 0;
+  }
+}
+
+.text {
+  padding-top: 6px;
+}
+
+.stepTitle {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.step p {
+  color: var(--white-80);
+  font-size: var(--fs-small);
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 56px;
+}
+
+.note {
+  font-size: var(--fs-small);
+  color: var(--white-60);
+}
+
+/* ----- Desktop: four steps in a row ----- */
+@media (min-width: 1024px) {
+  .steps {
+    --gap: 32px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 64px;
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .connector {
+    left: calc(50% + var(--circle) / 2 + 8px);
+    right: calc(var(--circle) / 2 + 8px - 50% - var(--gap));
+    top: calc(var(--circle) / 2 - 1px);
+    bottom: auto;
+    width: auto;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), rgb(245 166 35 / 0.35));
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  .joint {
+    --rotate: -90deg;
+  }
+
+  .connector::after {
+    background-image: linear-gradient(90deg, transparent 0%, #ffe2a8 45%, #fff 50%, #ffe2a8 55%, transparent 100%);
+    background-size: 40% 100%;
+  }
+
+  :global(.is-visible) > .connector::after {
+    animation-name: flowX;
+  }
+
+  :global(.is-visible) > .connector .joint {
+    animation-name: travelX;
+  }
+
+  .text {
+    padding-top: 0;
+  }
+
+  .cta {
+    align-items: center;
+    text-align: center;
+  }
+}

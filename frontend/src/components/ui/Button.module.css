@@ -1,0 +1,129 @@
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--navy);
+  --btn-border: transparent;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 14px 28px;
+  border: 2px solid var(--btn-border);
+  border-radius: var(--radius-md);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  white-space: normal;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  cursor: progress;
+  opacity: 0.75;
+  transform: none;
+}
+
+.arrow {
+  flex-shrink: 0;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+.wa {
+  flex-shrink: 0;
+}
+
+.block {
+  width: 100%;
+}
+
+/* Primary: gold → deep gold, with a soft sheen sweep on hover */
+.primary {
+  --btn-bg: var(--gold);
+  --btn-fg: var(--navy);
+  box-shadow: 0 6px 18px rgb(245 166 35 / 0.28);
+}
+
+.primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease-out);
+}
+
+.primary:hover {
+  --btn-bg: var(--gold-deep);
+  box-shadow: 0 10px 24px rgb(217 138 11 / 0.35);
+}
+
+.primary:hover::after {
+  transform: translateX(120%);
+}
+
+.primary:focus-visible {
+  outline-color: var(--navy);
+}
+
+.outlineLight {
+  --btn-fg: var(--navy);
+  --btn-border: var(--navy);
+}
+
+.outlineLight:hover {
+  --btn-bg: var(--navy);
+  --btn-fg: var(--white);
+}
+
+.outlineDark {
+  --btn-fg: var(--white);
+  --btn-border: var(--white);
+}
+
+.outlineDark:hover {
+  --btn-bg: var(--white);
+  --btn-fg: var(--navy);
+}
+
+.navy {
+  --btn-bg: var(--navy);
+  --btn-fg: var(--white);
+  --btn-border: var(--navy);
+  box-shadow: 0 8px 22px rgb(15 42 67 / 0.25);
+}
+
+.navy:hover {
+  --btn-bg: var(--navy-dark);
+  --btn-border: var(--navy-dark);
+}
+
+.navy:focus-visible {
+  outline-color: var(--navy);
+}

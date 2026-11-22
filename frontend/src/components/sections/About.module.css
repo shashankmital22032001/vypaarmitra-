@@ -1,0 +1,93 @@
+.grid {
+  display: grid;
+  gap: 56px;
+  align-items: center;
+}
+
+.paragraphs {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+  max-width: 620px;
+}
+
+.pill {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 8px 18px;
+  border: 1px solid rgb(245 166 35 / 0.45);
+  border-radius: var(--radius-pill);
+  background: rgb(245 166 35 / 0.08);
+  color: var(--gold);
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.cta {
+  margin-top: 32px;
+}
+
+.visual {
+  display: flex;
+  justify-content: center;
+}
+
+/* Large M tile with a thin gold border and a slow glow */
+.tileFrame {
+  position: relative;
+  padding: 14px;
+  border: 1px solid var(--gold);
+  border-radius: 40px;
+  /* Darker frame so the navy tile reads as a tile on the navy section */
+  background: var(--navy-dark);
+  animation: float 7s ease-in-out infinite;
+}
+
+.tileFrame::before {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(245 166 35 / 0.18), transparent 65%);
+  animation: breathe 5s ease-in-out infinite;
+}
+
+/* The logo itself stays untouched (brief: no effects on the logo). */
+.tile {
+  width: min(280px, 64vw);
+  height: auto;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 64px;
+  }
+
+  .tile {
+    width: 320px;
+  }
+}
