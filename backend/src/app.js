@@ -27,14 +27,15 @@ export function createApp() {
     helmet({
       contentSecurityPolicy: {
         directives: {
-          'script-src': ["'self'", 'https://www.googletagmanager.com'],
+          // Google Analytics 4 (per Google's CSP guide).
+          'script-src': ["'self'", 'https://*.googletagmanager.com'],
           'connect-src': [
             "'self'",
-            'https://www.google-analytics.com',
             'https://*.google-analytics.com',
             'https://*.analytics.google.com',
+            'https://*.googletagmanager.com',
           ],
-          'img-src': ["'self'", 'data:', 'https://www.google-analytics.com', 'https://www.googletagmanager.com'],
+          'img-src': ["'self'", 'data:', 'https://*.google-analytics.com', 'https://*.googletagmanager.com'],
         },
       },
     }),
