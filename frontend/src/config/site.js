@@ -14,8 +14,8 @@ export const site = Object.freeze({
   phoneDisplay: number.length === 10 ? `+91 ${number.slice(0, 5)} ${number.slice(5)}` : '',
   email: 's.mital@vypaarmitra.com',
   instagram: { handle: '@vypaarmitra', url: 'https://www.instagram.com/vypaarmitra' },
-  // Google Analytics 4 measurement ID (public). VITE_GA_ID in .env overrides it.
-  gaId: import.meta.env.VITE_GA_ID || 'G-NZZNX0EFQQ',
+  // Google Analytics 4 measurement ID (public): property "vypaarmitra.com", stream "VypaarMitra Website".
+  gaId: 'G-JE0RFGW2DR',
   apiUrl: (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, ''),
 });
 

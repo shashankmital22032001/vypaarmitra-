@@ -11,7 +11,7 @@ Copy, colours, fonts and layout follow *VypaarMitra Website Copy (Paste-Ready)*.
    - `ADMIN_API_KEY`: already generated; keep it secret
 3. **Frontend:** edit `frontend/.env`:
    - `VITE_WHATSAPP_NUMBER`: 10-digit number, no +91 (used by every WhatsApp button, the Call link and the schema)
-   - `VITE_GA_ID`: GA4 measurement ID (optional)
+   - Google Analytics ID: set in `src/config/site.js` (`gaId`)
 
 ## Develop
 
